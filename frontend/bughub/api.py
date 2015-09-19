@@ -1,6 +1,6 @@
 from requests import post
-from newspapyr import app
-from newspapyr.config import config
+from bughub import app
+from bughub.config import config
 
 class ApiWrapper:
     def __init__(self, path="https://service1.newspapyr.co/"):
