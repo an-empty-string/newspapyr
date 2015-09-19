@@ -1,5 +1,6 @@
-from flask import Flask, jsonify, request, url_for
 import functools
+from flask import Flask, jsonify, request, url_for
+
 app = Flask(__name__)
 
 def make_routes():

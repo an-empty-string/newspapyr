@@ -32,5 +32,5 @@ class Keyword(BaseModel):
     word = CharField(128)
 
 class IssueKeyword(BaseModel):
-    issue = ForeignKeyField(Article, related_name='articlekeywords')
-    keyword = ForeignKeyField(Keyword, related_name='articlekeywords')
+    issue = ForeignKeyField(Issue, related_name='issuekeywords')
+    keyword = ForeignKeyField(Keyword, related_name='issuekeywords')
