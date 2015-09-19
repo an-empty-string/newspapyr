@@ -1,0 +1,3 @@
+ssl:
+    key: /var/webapp/dev.key
+    crt: /var/webapp/dev.crt
