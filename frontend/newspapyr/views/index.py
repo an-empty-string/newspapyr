@@ -13,12 +13,13 @@ def session(uid):
 def index():
     return render_template('index.html')
 
-@app.route('/api/register', methods = ['POST']):
-def register():
+@app.route('/api/register')
+def api_register():
 	i = request.form.to_dict()
 	uid = api.auth.register(username=i["username"], password=i["password"])
 	session(uid)
 	return "whoooooo, you're registered with uid" + uid
 
 @app.route('/register')
-	return render_template()
+def register():
+	return render_template("register.html")
