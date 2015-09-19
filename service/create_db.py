@@ -1,2 +1,3 @@
 from service.db import *
-db.create_tables([User, Article, Keyword, ArticleKeyword, ArticleKeywordVote, ArticleVote])
+
+db.create_tables([User, Issue, Keyword, IssueKeyword])

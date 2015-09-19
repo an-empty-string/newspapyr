@@ -1,4 +1,4 @@
 ssl:
-    key: /var/webapp/dev.key
-    crt: /var/webapp/dev.crt
-    ca: /var/webapp/ca.crt
+  key: /var/webapp/dev.key
+  crt: /var/webapp/dev.crt
+  ca: /var/webapp/ca.crt

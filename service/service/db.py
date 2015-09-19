@@ -22,7 +22,7 @@ class User(BaseModel):
     username = CharField(32)
     password = CharField(60)
 
-class Article(BaseModel):
+class Issue(BaseModel):
     title = CharField(8192)
     source = CharField(128)
     time = DateTimeField()
@@ -31,16 +31,6 @@ class Article(BaseModel):
 class Keyword(BaseModel):
     word = CharField(128)
 
-class ArticleKeyword(BaseModel):
-    article = ForeignKeyField(Article, related_name='articlekeywords')
-    keyword = ForeignKeyField(Keyword, related_name='articlekeywords')
-
-class ArticleKeywordVote(BaseModel):
-    user = ForeignKeyField(User, related_name='articlekeywordvotes')
-    article_keyword = ForeignKeyField(ArticleKeyword, related_name='votes')
-    score = IntegerField()
-
-class ArticleVote(BaseModel):
-    user = ForeignKeyField(User, related_name='articlevotes')
-    article = ForeignKeyField(Article, related_name='uservotes')
-    score = IntegerField()
+class IssueKeyword(BaseModel):
+    issue = ForeignKeyField(Issue, related_name='issuekeywords')
+    keyword = ForeignKeyField(Keyword, related_name='issuekeywords')
