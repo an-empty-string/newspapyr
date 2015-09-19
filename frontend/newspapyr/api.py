@@ -6,7 +6,7 @@ class ApiWrapper:
     def __init__(self, path="https://service1.newspapyr.co/"):
         self.path = path
 
-    def __getitem__(self, x):
+    def __getattr__(self, x):
         return ApiWrapper(self.path + x + "/")
 
     def __call__(self, **kwargs):

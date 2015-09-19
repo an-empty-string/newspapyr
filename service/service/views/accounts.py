@@ -7,7 +7,7 @@ from service.db import User
 def create_user(args):
     user = args["username"]
     if User.select().where(User.username == user).count():
-        return False
+        return dict(success=False)
 
     passwd = args["password"]
     hashed_passwd = bcrypt.hashpw(passwd, bcrypt.gensalt())
