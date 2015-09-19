@@ -4,21 +4,21 @@ from newspapyr.api import ApiWrapper
 
 api = ApiWrapper()
 
-app.secret_key = 'DANK MEMES'
-
-def session(uid):
-	session['uid'] = uid
+#def sessionuid(uid):
+#	session['uid'] = uid
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
-@app.route('/api/register')
+@app.route('/api/register', methods=['POST'])
 def api_register():
-	i = request.form.to_dict()
-	uid = api.auth.register(username=i["username"], password=i["password"])
-	session(uid)
-	return "whoooooo, you're registered with uid" + uid
+	i = request.form
+	auth = api.auth.register(username=i["username"], password=i["password"])
+	if not auth["success"]:
+		return "no"
+#	session["uid"] = auth["uid"]
+	return "whoooooo, you're registered"
 
 @app.route('/register')
 def register():
