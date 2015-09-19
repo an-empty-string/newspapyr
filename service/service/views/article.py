@@ -30,13 +30,25 @@ def article_tags(args):
 
 def tag_article_vote(args, score):
     # the foreign keys are real
-    ArticleKeywordVote.delete().where(ArticleKeywordVote.article_keyword.article.id == args["aid"] & ArticleKeywordVote.article_keyword.keyword.word == args["word"] & ArticleKeywordVote.user.id == args["uid"]).execute()
-    ak = list(ArticleKeyword.select().where(ArticleKeyword.article.id == args["aid"] & ArticleKeyword))
-    if not ak:
-        k = list(Keyword.select().where(Keyword.word == args["word"]))
-        if not k:
-            k = [Keyword.create()]
+    try:
+        ArticleKeywordVote.delete().where(ArticleKeywordVote.article_keyword.article.id == args["aid"] & ArticleKeywordVote.article_keyword.keyword.word == args["word"] & ArticleKeywordVote.user.id == args["uid"]).execute()
+        article = Article.get(args["aid"])
+        user = User.get(args["uid"])
+        ak = list(ArticleKeyword.select().where(ArticleKeyword.article.id == args["aid"] & ArticleKeyword.keyword.word == args["word"]))
+        if not ak:
+            k = list(Keyword.select().where(Keyword.word == args["word"]))
+            if not k:
+                k = [Keyword.create(word=args["word"])]
+            ak = [ArticleKeyword.create(article=article, keyword=k)]
+        ArticleKeywordVote.create(user=user, article_keyword=ak[0], score=score)
+        return True
+    except:
+        return False
 
 @method("tag.upvote")
 def upvote_tag(args):
-    pass
+    return dict(success=tag_article_vote(args, 1))
+
+@method("tag.downvote")
+def downvote_tag(args):
+    return dict(success=tag_article_vote(args, 0))

@@ -23,6 +23,6 @@ def login(args):
 
     passwd = args["password"]
     if bcrypt.hashpw(passwd, matching[0].password) == matching[0].password:
-        return dict(success=True, id=matching[0].id)
+        return dict(success=True, uid=matching[0].id)
 
     return dict(success=False)
