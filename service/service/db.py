@@ -24,6 +24,7 @@ class User(BaseModel):
 class Article(BaseModel):
     title = CharField(8192)
     source = CharField(128)
+    time = DateTimeField()
     text = TextField()
 
 class Keyword(BaseModel):
