@@ -1,0 +1,4 @@
+database:
+    host: 10.240.1.228
+    user: app
+    db: app
