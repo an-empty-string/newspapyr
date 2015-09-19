@@ -12,17 +12,17 @@ def create_user(args):
     passwd = args["password"]
     hashed_passwd = bcrypt.hashpw(passwd, bcrypt.gensalt())
 
-    return User.create(username=user, password=hashed_passwd).id
+    return dict(uid=User.create(username=user, password=hashed_passwd).id)
 
 @method("auth.login")
 def login(args):
     user = args["username"]
     matching = list(User.select().where(User.username == user))
     if not matching:
-        return -1
+        return dict(success=False)
 
     passwd = args["password"]
     if bcrypt.hashpw(passwd, matching[0].password) == matching[0].password:
-        return matching[0].id
+        return dict(success=True, id=matching[0].id)
 
-    return -1
+    return dict(success=False)
