@@ -18,6 +18,6 @@ def method(route):
     return decorator
 
 import service.views.ping
+import service.views.accounts
 
-if __name__ == '__main__':
-    app.run(port=4999, debug=True)
+app.config.update(PROPAGATE_EXCEPTIONS=True)

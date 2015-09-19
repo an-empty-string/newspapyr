@@ -10,8 +10,9 @@ def before_request_handler():
     db.connect()
 
 @app.after_request
-def after_request_handler():
+def after_request_handler(exc):
     db.close()
+    return exc
 
 class BaseModel(Model):
     class Meta:
